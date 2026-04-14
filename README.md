@@ -1,4 +1,5 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Đây là project Next.js cho bài thực hành môn Các công nghệ mới trong PTPM.
+Trang chủ hiển thị thông tin cá nhân cơ bản, giới thiệu ngắn và một số nội dung về sở thích, mục tiêu học tập.
 
 ## Getting Started
 

@@ -1,3 +1,12 @@
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
 const projects = [
   {
     title: "Website Portfolio",
@@ -38,40 +47,33 @@ export default function ProjectsPage() {
 
         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
           {projects.map((project) => (
-            <article
+            <Card
               key={project.title}
-              className="flex flex-col rounded-2xl border border-slate-200 p-6 transition-shadow hover:shadow-md"
+              className="transition-shadow hover:shadow-md"
             >
-              <div className="mb-3 flex items-center justify-between gap-3">
-                <h2 className="text-xl font-semibold text-slate-900">
-                  {project.title}
-                </h2>
-                <span
-                  className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                    project.status === "Hoàn thành"
-                      ? "bg-emerald-100 text-emerald-700"
-                      : "bg-amber-100 text-amber-700"
-                  }`}
-                >
-                  {project.status}
-                </span>
-              </div>
-
-              <p className="flex-1 leading-7 text-slate-600">
-                {project.description}
-              </p>
-
-              <div className="mt-4 flex flex-wrap gap-2">
-                {project.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="rounded-full bg-sky-50 px-3 py-1 text-sm font-medium text-sky-700"
+              <CardHeader>
+                <div className="flex items-center justify-between gap-3">
+                  <CardTitle className="text-lg">{project.title}</CardTitle>
+                  <Badge
+                    variant={
+                      project.status === "Hoàn thành" ? "default" : "secondary"
+                    }
                   >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </article>
+                    {project.status}
+                  </Badge>
+                </div>
+                <CardDescription>{project.description}</CardDescription>
+              </CardHeader>
+              <CardContent className="pt-0 pb-5">
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((tech) => (
+                    <Badge key={tech} variant="outline">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>

@@ -3,6 +3,11 @@
 import { useEffect, useState } from "react";
 import type { GuestbookEntry } from "@/data/guestbook";
 import DeleteButton from "@/components/delete-button";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Separator } from "@/components/ui/separator";
 
 interface GuestbookListProps {
   entries: GuestbookEntry[];
@@ -23,7 +28,12 @@ export default function GuestbookList({ entries }: GuestbookListProps) {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-slate-400">{entries.length} lời nhắn</p>
+      <div className="flex items-center justify-between gap-3">
+        <p className="text-sm text-slate-500">Danh sách lời nhắn</p>
+        <Badge variant="secondary">{entries.length} lời nhắn</Badge>
+      </div>
+
+      <Separator />
 
       {visibleEntries.length === 0 ? (
         <p className="py-8 text-center text-slate-400">
@@ -31,53 +41,59 @@ export default function GuestbookList({ entries }: GuestbookListProps) {
         </p>
       ) : (
         visibleEntries.map((entry) => (
-          <article
-            key={entry.id}
-            className="rounded-2xl border border-slate-200 p-5 transition-shadow hover:shadow-sm"
-          >
-            <div className="mb-2 flex items-start justify-between gap-4">
-              <div>
-                <h2 className="font-semibold text-slate-900">{entry.name}</h2>
-                <p className="text-xs text-slate-400">
-                  {new Date(entry.createdAt).toLocaleDateString("vi-VN")}
-                </p>
+          <Card key={entry.id} className="transition-shadow hover:shadow-md">
+            <CardContent className="pt-5">
+              <div className="mb-3 flex items-start justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <Avatar>
+                    <AvatarFallback>{entry.name.slice(0, 1)}</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h2 className="font-semibold text-slate-900">
+                      {entry.name}
+                    </h2>
+                    <p className="text-xs text-slate-400">
+                      {new Date(entry.createdAt).toLocaleDateString("vi-VN")}
+                    </p>
+                  </div>
+                </div>
+
+                <DeleteButton id={entry.id} />
               </div>
 
-              <DeleteButton id={entry.id} />
-            </div>
-
-            <p className="whitespace-pre-line text-slate-600">
-              {entry.message}
-            </p>
-          </article>
+              <p className="whitespace-pre-line text-slate-600">
+                {entry.message}
+              </p>
+            </CardContent>
+          </Card>
         ))
       )}
 
       {entries.length > pageSize && (
         <div className="flex items-center justify-between gap-3 pt-2">
-          <button
+          <Button
             type="button"
+            variant="outline"
             onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
             disabled={activePage === 1}
-            className="rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Trang trước
-          </button>
+          </Button>
 
           <p className="text-sm text-slate-500">
             Trang {activePage} / {totalPages}
           </p>
 
-          <button
+          <Button
             type="button"
+            variant="outline"
             onClick={() =>
               setCurrentPage((page) => Math.min(totalPages, page + 1))
             }
             disabled={activePage === totalPages}
-            className="rounded-full border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Trang sau
-          </button>
+          </Button>
         </div>
       )}
     </div>

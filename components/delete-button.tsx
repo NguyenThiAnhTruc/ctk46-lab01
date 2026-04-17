@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { deleteGuestbookEntry } from "@/app/guestbook/actions";
+import { Button } from "@/components/ui/button";
 
 interface DeleteButtonProps {
   id: string;
@@ -31,13 +32,14 @@ export default function DeleteButton({ id }: DeleteButtonProps) {
   }
 
   return (
-    <button
+    <Button
       type="button"
+      variant="destructive"
+      size="sm"
       onClick={() => void handleDelete()}
       disabled={pending}
-      className="text-xs font-medium text-rose-500 transition-colors hover:text-rose-700 disabled:cursor-not-allowed disabled:opacity-50"
     >
       {pending ? "Đang xóa..." : "Xóa"}
-    </button>
+    </Button>
   );
 }

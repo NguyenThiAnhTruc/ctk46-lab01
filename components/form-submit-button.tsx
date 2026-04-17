@@ -1,6 +1,7 @@
 "use client";
 
 import { useFormStatus } from "react-dom";
+import { Button } from "@/components/ui/button";
 
 interface FormSubmitButtonProps {
   idleText: string;
@@ -16,8 +17,8 @@ export default function FormSubmitButton({
   const { pending } = useFormStatus();
 
   return (
-    <button type="submit" disabled={pending} className={className}>
+    <Button type="submit" disabled={pending} className={className}>
       {pending ? pendingText : idleText}
-    </button>
+    </Button>
   );
 }

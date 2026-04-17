@@ -25,12 +25,12 @@ export default function ContactPage() {
             <p>
               <strong>GitHub:</strong>{" "}
               <a
-                href="https://github.com/nguyenthianhtruc"
+                href="https://github.com/NguyenThiAnhTruc"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sky-700 hover:underline"
               >
-                github.com/nguyenthianhtruc
+                github.com/NguyenThiAnhTruc
               </a>
             </p>
           </div>

@@ -38,7 +38,7 @@ export default function AboutPage() {
         <div className="mt-4 rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200">
           <p className="font-semibold text-slate-900">Đại học Đà Lạt</p>
           <p className="mt-1 text-slate-600">
-            Cử nhân Công nghệ Thông tin, 2021 - 2025
+            Kỹ sư Công nghệ Thông tin, 2022 - 2026
           </p>
         </div>
       </div>

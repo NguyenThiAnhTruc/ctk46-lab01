@@ -5,7 +5,7 @@ export default function Footer() {
         <p>© 2026 — Nguyễn Thị Ánh Trúc | CTK46A</p>
         <p>
           Email: nguyenthianhtruc@example.com · GitHub:
-          github.com/nguyenthianhtruc
+          github.com/NguyenThiAnhTruc
         </p>
       </div>
     </footer>

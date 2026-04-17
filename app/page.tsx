@@ -1,4 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
+import logo1 from "./logo1.png";
+import Counter from "../components/counter";
 
 const skills = [
   "JavaScript",
@@ -15,8 +18,13 @@ export default function HomePage() {
   return (
     <section className="mx-auto w-full max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="mb-16 text-center">
-        <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-sky-100 text-4xl font-bold text-sky-700 shadow-sm">
-          A
+        <div className="mx-auto mb-6 flex h-28 w-28 items-center justify-center overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 sm:h-32 sm:w-32">
+          <Image
+            src={logo1}
+            alt="Ảnh đại diện Nguyễn Thị Ánh Trúc"
+            priority
+            className="h-full w-full object-cover"
+          />
         </div>
 
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-sky-700">
@@ -74,6 +82,22 @@ export default function HomePage() {
         >
           Xem blog →
         </Link>
+      </div>
+
+      <div className="mt-16 rounded-2xl bg-white p-8 text-center shadow-sm ring-1 ring-slate-200">
+        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-700">
+          Counter
+        </p>
+        <h2 className="mt-3 text-2xl font-bold text-slate-900">
+          Bộ đếm tương tác
+        </h2>
+        <p className="mx-auto mt-3 max-w-2xl text-slate-600">
+          Đây là Client Component dùng `useState`, còn phần trang chủ vẫn được
+          render trên server.
+        </p>
+        <div className="mt-6 flex justify-center">
+          <Counter />
+        </div>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPostBySlug, posts } from "@/data/posts";
+import LikeButton from "../../../components/like-button";
 
 export function generateStaticParams() {
   return posts.map((post) => ({
@@ -44,6 +45,10 @@ export default async function BlogPostPage({
 
       <div className="mt-6 whitespace-pre-line leading-8 text-slate-600">
         {post.content}
+      </div>
+
+      <div className="mt-8 border-t border-slate-200 pt-6">
+        <LikeButton />
       </div>
     </article>
   );

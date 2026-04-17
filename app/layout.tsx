@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Footer from "@/components/footer";
+import Navbar from "@/components/navbar";
 
 export const metadata: Metadata = {
-  title: "Nguyễn Thị Ánh Trúc | CTK46A",
-  description:
-    "Trang chủ cá nhân của Nguyễn Thị Ánh Trúc - MSSV 2212479, lớp CTK46A.",
+  title: "Portfolio — Nguyễn Thị Ánh Trúc",
+  description: "Website portfolio và blog cá nhân của Nguyễn Thị Ánh Trúc.",
 };
 
 export default function RootLayout({
@@ -14,7 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi">
-      <body>{children}</body>
+      <body className="min-h-screen flex flex-col bg-slate-50 text-slate-900 antialiased">
+        <Navbar />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }

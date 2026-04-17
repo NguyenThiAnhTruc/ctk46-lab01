@@ -1,39 +1,58 @@
 import Link from "next/link";
-import { posts } from "@/data/posts";
+import type { Post } from "@/types/post";
 
-export default function BlogPage() {
+async function getPosts(): Promise<Post[]> {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+    next: { revalidate: 60 },
+  });
+
+  if (!res.ok) {
+    throw new Error("Không thể tải danh sách bài viết");
+  }
+
+  return res.json();
+}
+
+export default async function BlogPage() {
+  const posts = await getPosts();
+
   return (
-    <article className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm sm:p-10">
-      <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-700">
-        Blog
+    <div>
+      <h1 className="mb-2 text-3xl font-bold text-slate-900">Blog</h1>
+      <p className="mb-6 text-slate-500">
+        Tổng cộng {posts.length} bài viết từ API
       </p>
-      <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-900">
-        Danh sách bài viết
-      </h1>
 
-      <div className="mt-8 grid gap-5">
-        {posts.map((post) => (
-          <Link
-            key={post.slug}
-            href={`/blog/${post.slug}`}
-            className="rounded-2xl border border-slate-200 p-5 transition-colors hover:border-sky-300 hover:bg-sky-50/50"
+      <div className="space-y-6">
+        {posts.slice(0, 10).map((post) => (
+          <article
+            key={post.id}
+            className="rounded-lg border border-slate-200 bg-white p-6 transition-shadow hover:shadow-md"
           >
             <div className="mb-2 flex items-center gap-3 text-xs text-slate-500">
               <span className="rounded-full bg-sky-100 px-2 py-1 font-medium text-sky-700">
-                {post.category}
+                Tác giả #{post.userId}
               </span>
-              <span>{post.date}</span>
+              <span className="text-sm text-slate-400">Bài #{post.id}</span>
             </div>
-            <h2 className="text-xl font-semibold text-slate-900">
-              {post.title}
-            </h2>
-            <p className="mt-2 text-slate-600">{post.excerpt}</p>
-            <span className="mt-3 inline-block text-sm font-medium text-sky-700">
+
+            <Link href={`/blog/${post.id}`}>
+              <h2 className="mb-2 text-xl font-semibold capitalize transition-colors hover:text-sky-700">
+                {post.title}
+              </h2>
+            </Link>
+
+            <p className="line-clamp-2 text-slate-600">{post.body}</p>
+
+            <Link
+              href={`/blog/${post.id}`}
+              className="mt-3 inline-block text-sm text-sky-700 hover:underline"
+            >
               Đọc thêm →
-            </span>
-          </Link>
+            </Link>
+          </article>
         ))}
       </div>
-    </article>
+    </div>
   );
 }

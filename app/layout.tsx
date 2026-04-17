@@ -5,7 +5,7 @@ import Navbar from "@/components/navbar";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Portfolio — Nguyễn Thị Ánh Trúc",
@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" className={cn("font-sans", geist.variable)}>
-      <body className="min-h-screen flex flex-col bg-slate-50 text-slate-900 antialiased">
+      <body className="min-h-screen flex flex-col text-slate-900 antialiased">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
